@@ -1,8 +1,13 @@
-import React from 'react';
-import LogoImage from './assets/devmemory_logo.png';
 import * as C from './App.styles';
+import { InfoItem } from './components/InfoItem'
+import {ButtonItem} from './components/ButtonItem'
+import LogoImage from './assets/devmemory_logo.png';
+import Restart from './svgs/restart.svg';
 
 function App() {
+
+   const ResetAndCreateGrid = () =>{}
+
    return (
       <C.Container>
          <C.Info>
@@ -10,9 +15,13 @@ function App() {
                <img src={LogoImage} alt="Logomarca" width={200} />
             </C.LogoLink>
 
-            <C.InfoArea>...</C.InfoArea>
+            <C.InfoArea>
+               <InfoItem label='Tempo' value="00:00"/>
+               <InfoItem label='Movimentos' value="0"/>
+            </C.InfoArea>
 
-            <button>Reiniciar</button>
+            
+            <ButtonItem label="Reiniciar" icon={Restart} onClick={ResetAndCreateGrid}/>
          </C.Info>
 
          <C.GridArea>***</C.GridArea>

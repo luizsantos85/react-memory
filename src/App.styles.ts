@@ -9,7 +9,6 @@ export const Container = styled.div`
    gap: 10px;
 
    @media (max-width: 750px) {
-      /* padding: 50px 10px; */
       flex-direction: column;
    }
 `;
@@ -44,7 +43,6 @@ export const GridArea = styled.div`
    flex: 1;
    display: flex;
    justify-content: flex-end;
-   background-color:red;
 
    @media (max-width: 750px) {
       justify-content: center;
