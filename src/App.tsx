@@ -30,7 +30,7 @@ function App() {
          tmpGrid.push({
             item: null,
             shown: false,
-            permanentShown: false,
+            permanentShown: true,
          });
       }
 
@@ -49,6 +49,8 @@ function App() {
 
       setPlaying(true);
    };
+
+   const handleItemClick = (index : number) => {}
 
    return (
       <C.Container>
@@ -72,7 +74,7 @@ function App() {
          <C.GridArea>
             <C.Grid>
                {gridItems.map((item,index) => (
-                  <GridItem />
+                  <GridItem  key={index} item={item} onClick={()=> handleItemClick(index)}/>
                ))}
             </C.Grid>
          </C.GridArea>
