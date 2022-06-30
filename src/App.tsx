@@ -7,6 +7,7 @@ import Restart from './svgs/restart.svg';
 import { GridItemType } from './types/GridItemType';
 import { items } from './data/items';
 import { GridItem } from './components/GridItem';
+import { formatTimeElapsed } from './helpers/formatTimeElapsed';
 
 function App() {
    const [playing, setPlaying] = useState<boolean>(false);
@@ -16,6 +17,13 @@ function App() {
    const [gridItems, setGridItems] = useState<GridItemType[]>([]);
 
    useEffect(() => ResetAndCreateGrid(), []);
+
+   useEffect(() => {
+      const timer = setInterval(() => {
+         if (playing) setTimeElapsed(timeElapsed + 1);
+      }, 1000);
+      return () => clearInterval(timer);
+   }, [playing, timeElapsed]);
 
    const ResetAndCreateGrid = () => {
       //passo 1 - resetar o jogo
@@ -30,7 +38,7 @@ function App() {
          tmpGrid.push({
             item: null,
             shown: false,
-            permanentShown: true,
+            permanentShown: false,
          });
       }
 
@@ -50,7 +58,7 @@ function App() {
       setPlaying(true);
    };
 
-   const handleItemClick = (index : number) => {}
+   const handleItemClick = (index: number) => {};
 
    return (
       <C.Container>
@@ -60,7 +68,7 @@ function App() {
             </C.LogoLink>
 
             <C.InfoArea>
-               <InfoItem label="Tempo" value="00:00" />
+               <InfoItem label="Tempo" value={formatTimeElapsed(timeElapsed)} />
                <InfoItem label="Movimentos" value="0" />
             </C.InfoArea>
 
@@ -73,8 +81,12 @@ function App() {
 
          <C.GridArea>
             <C.Grid>
-               {gridItems.map((item,index) => (
-                  <GridItem  key={index} item={item} onClick={()=> handleItemClick(index)}/>
+               {gridItems.map((item, index) => (
+                  <GridItem
+                     key={index}
+                     item={item}
+                     onClick={() => handleItemClick(index)}
+                  />
                ))}
             </C.Grid>
          </C.GridArea>
